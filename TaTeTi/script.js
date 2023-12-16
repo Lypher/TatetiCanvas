@@ -123,6 +123,7 @@ const slots = [
 
 //turnos:
 let turno = 1;
+let gamebloqueado = false;
 
 // Dibujar la "X"
 const dibujarX = (slot) => {
@@ -164,23 +165,27 @@ const clickEnSlots = (event) => {
 
   const slot = devolverSlot(clicX, clicY);
   if (slot) {
-    if (!slot.ocupado) {
-      if (turno == 1) {
-        dibujarX(slot);
-        slot.ocupado = true;
-        slot.ocupadopor = "x";
-        turno++;
-      } else {
-        dibujarO(slot);
-        slot.ocupado = true;
-        slot.ocupadopor = "o";
-        turno--;
-      }
+    if (gamebloqueado == true) {
+      alert("juego terminado,comienze uno nuevo");
     } else {
-      alert("casilla ocupada");
+      if (!slot.ocupado) {
+        if (turno == 1) {
+          dibujarX(slot);
+          slot.ocupado = true;
+          slot.ocupadopor = "x";
+          turno++;
+        } else {
+          dibujarO(slot);
+          slot.ocupado = true;
+          slot.ocupadopor = "o";
+          turno--;
+        }
+      } else {
+        alert("casilla ocupada");
+      }
+      verificarGanador();
     }
   }
-  verificarGanador();
 };
 
 // Función para obtener el slot según las coordenadas del clic
@@ -225,6 +230,7 @@ const verificarGanador = () => {
       ocupadoPorArray[6] === "x")
   ) {
     alert("X gana");
+    gamebloqueado = true;
   }
   if (
     (ocupadoPorArray[0] === "o" &&
@@ -253,6 +259,7 @@ const verificarGanador = () => {
       ocupadoPorArray[6] === "o")
   ) {
     alert("O gana");
+    gamebloqueado = true;
   }
 };
 
