@@ -1,0 +1,13 @@
+button {
+  display: flex;
+  margin: 0 auto;
+}
+div {
+  height: 400;
+  width: 400;
+  display: inline-block;
+
+  background-color: aqua;
+  justify-content: center;
+  align-items: center;
+}
